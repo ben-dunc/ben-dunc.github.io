@@ -1,8 +1,39 @@
-body {
-    font-family: "roboto";
-}
-
 @font-face {
     font-family: "roboto";
     src: url(assets/roboto/Roboto-Regular.ttf);
+}
+
+body {
+    font-family: "roboto";
+    color: #fff;
+
+    width: 650px;
+    max-width: 100vw;
+    margin: auto;
+
+    background-color: #101010;
+}
+
+p {
+    text-indent: 50px;
+}
+
+/* unvisited link */
+a:link {
+    color: rgb(0, 150, 0);
+}
+
+/* visited link */
+a:visited {
+    color: rgb(0, 100, 0);
+}
+
+/* mouse over link */
+a:hover {
+    color: rgb(0, 200, 0);
+}
+
+/* selected link */
+a:active {
+    color: rgb(200, 200, 200);
 }
