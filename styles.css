@@ -1,39 +1,162 @@
 @font-face {
     font-family: "roboto";
-    src: url(assets/roboto/Roboto-Regular.ttf);
+    src: url(assets/roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+    font-family: "roboto-bold";
+    src: url(assets/roboto/Roboto-Bold.ttf);
 }
 
 body {
     font-family: "roboto";
     color: #fff;
 
-    width: 650px;
-    max-width: 100vw;
+    width: 100vw;
+    max-width: 1000px;
     margin: auto;
+    /* padding: 32px; */
 
-    background-color: #101010;
+    background-color: #100a0a;
 }
 
-p {
+h1 {
+    font-size: 3em;
+}
+
+h1,
+h2,
+h3 {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #f3ec78, #af4261);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+
+    font-family: "roboto-bold";
+}
+
+h2 {
+    margin-top: 75px;
+}
+
+b {
+    font-family: "roboto-bold";
+}
+
+p.body {
     text-indent: 50px;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
 }
 
 /* unvisited link */
 a:link {
-    color: rgb(0, 150, 0);
+    color: rgb(0, 200, 0);
 }
 
 /* visited link */
 a:visited {
-    color: rgb(0, 100, 0);
+    color: rgb(0, 150, 0);
 }
 
 /* mouse over link */
 a:hover {
-    color: rgb(0, 200, 0);
+    color: rgb(0, 255, 0);
 }
 
 /* selected link */
 a:active {
-    color: rgb(200, 200, 200);
+    color: rgb(240, 240, 240);
+}
+
+hr {
+    color: white;
+}
+
+.landing {
+    height: 100vh;
+}
+
+.landing-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.landing-arrow {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: gray;
+}
+
+.projects {
+    min-height: 70vh;
+    margin-bottom: 50px;
+}
+
+.project-row {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.project-box {
+    max-height: 90vw;
+    min-width: 200px;
+    height: 300px;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 5px;
+    background-color: #222;
+}
+
+.f1 {
+    flex-grow: 1;
+}
+
+.f2 {
+    flex-grow: 2;
+}
+
+.f3 {
+    flex-grow: 3;
+}
+
+.f5 {
+    flex-grow: 5;
+}
+
+.about-me,
+.toolkit {
+    min-height: 50vh;
+}
+
+.footer {}
+
+.m0 {
+    margin: 0;
+}
+
+.p0 {
+    padding: 0;
+}
+
+.p25 {
+    padding: 25px;
+}
+
+.color-light {
+    color: gray;
+}
+
+.color-accent {
+    color: green;
 }
