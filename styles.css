@@ -106,15 +106,12 @@ hr {
 }
 
 .landing-content {
-    /* position: absolute;  */
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-    margin-top: 45vh;
+    margin-top: 40vh;
 }
 
 .landing-arrow {
     position: absolute;
-    bottom: 25px;
+    top: 95vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -137,7 +134,6 @@ hr {
 }
 
 .project-box {
-    /* max-height: 90vw; */
     min-width: 200px;
     height: 300px;
     border-radius: 20px;
