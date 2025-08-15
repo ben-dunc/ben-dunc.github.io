@@ -15,12 +15,13 @@
 
 body {
     font-family: "roboto";
-    color: #fff;
-    background-color: black;
+    color: #E4EAF1;
+    background-color: #2E333F;
 
-    width: 100vw;
-    max-width: 1000px;
     margin: auto;
+    padding: 16px;
+    max-width: 1000px;
+    width: calc(100vw - 32px);
 }
 
 h1 {
@@ -52,70 +53,24 @@ p.body {
     padding: 0;
 }
 
-/* unvisited link */
 a:link {
-    color: #ff2b3d;
-    /* color: rgb(0, 200, 0); */
+    color: #A3BD8E;
 }
 
-/* visited link */
 a:visited {
-    color: #c01f2c;
-    /* color: rgb(0, 150, 0); */
+    color: #6f8b59;
 }
 
-/* mouse over link */
 a:hover {
-    color: #fe5d6a;
-    /* color: rgb(0, 255, 0); */
+    color: #d3e9c1;
 }
 
-/* selected link */
 a:active {
-    color: #ff2b3d;
-    /* color: rgb(240, 240, 240); */
-}
-
-/* dark link */
-a.link-dark:link {
-    color: #c01f2c;
-    /* color: rgb(0, 100, 0); */
-}
-
-a.link-dark:visited {
-    color: #ee2c3d;
-    /* color: rgb(0, 80, 0); */
-}
-
-a.link-dark:hover {
-    color: #c01f2c;
-    /* color: rgb(0, 255, 0); */
-}
-
-a.link-dark:active {
-    color: #c01f2c;
-    /* color: rgb(240, 240, 240); */
+    color: #A3BD8E;
 }
 
 hr {
     color: white;
-}
-
-.landing {
-    height: 100vh;
-}
-
-.landing-content {
-    margin-top: 40vh;
-}
-
-.landing-arrow {
-    position: absolute;
-    top: 95vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: gray;
 }
 
 .projects {
@@ -139,21 +94,17 @@ hr {
     border-radius: 20px;
     padding: 15px;
     margin: 5px;
-    background-color: #222;
+    background-color: #4D5668;
 }
 
 .project-box-inner {
     height: 270px;
     border-radius: 15px;
-    /* background-attachment: local; */
-    /* padding: 15px; */
-    /* background-color: #222; */
     background-image: url("/assets/placeholder.png");
     background-size: cover;
 }
 
 .project-image {
-    /* position: absolute; */
     width: inherit;
     height: inherit;
     left: 0;
@@ -166,16 +117,10 @@ hr {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-
-    background-color: white;
     border-radius: 15px;
-
-    margin: 0;
-    padding: 0;
 }
 
 .tool {
-    /* flex-grow: 1; */
     margin: 50px;
     width: 100px;
     height: 100px;
@@ -184,13 +129,10 @@ hr {
     img {
         width: 100px;
         height: 100px;
-        fill: white;
-        stroke: white;
     }
 
     p {
         text-align: center;
-        color: black;
         font-family: "roboto-bold";
     }
 }
@@ -232,75 +174,7 @@ hr {
 }
 
 .color-accent {
-    color: #ff2b3d;
-}
-
-.background-gradient-light {
-    background: #ff5e4f;
-    background: linear-gradient(45deg,
-            rgba(255, 94, 79, 1) 0%,
-            rgba(255, 94, 79, 1) 20%,
-            rgba(255, 155, 128, 1) 20%,
-            rgba(255, 155, 128, 1) 35%,
-            rgba(255, 190, 130, 1) 35%,
-            rgba(255, 190, 130, 1) 50%,
-            rgba(255, 234, 150, 1) 50%,
-            rgba(255, 234, 150, 1) 65%,
-            rgba(255, 250, 161, 1) 65%,
-            rgba(255, 250, 161, 1) 80%,
-            rgba(255, 247, 92, 1) 80%,
-            rgba(255, 247, 92, 1) 100%);
-    background: -webkit-linear-gradient(45deg,
-            rgba(255, 94, 79, 1) 0%,
-            rgba(255, 94, 79, 1) 20%,
-            rgba(255, 155, 128, 1) 20%,
-            rgba(255, 155, 128, 1) 35%,
-            rgba(255, 190, 130, 1) 35%,
-            rgba(255, 190, 130, 1) 50%,
-            rgba(255, 234, 150, 1) 50%,
-            rgba(255, 234, 150, 1) 65%,
-            rgba(255, 250, 161, 1) 65%,
-            rgba(255, 250, 161, 1) 80%,
-            rgba(255, 247, 92, 1) 80%,
-            rgba(255, 247, 92, 1) 100%);
-
-    background-attachment: fixed;
-    -webkit-background-attachment: fixed;
-    background-size: 100%;
-}
-
-.background-gradient-dark {
-    background: rgb(0, 18, 34);
-    background: linear-gradient(45deg,
-            rgba(28, 28, 28, 1) 0%,
-            rgba(28, 28, 28, 1) 20%,
-            rgba(18, 18, 18, 1) 20%,
-            rgba(18, 18, 18, 1) 35%,
-            rgba(13, 13, 13, 1) 35%,
-            rgba(13, 13, 13, 1) 50%,
-            rgba(10, 10, 10, 1) 50%,
-            rgba(10, 10, 10, 1) 65%,
-            rgba(13, 13, 13, 1) 65%,
-            rgba(13, 13, 13, 1) 80%,
-            rgba(18, 18, 18, 1) 80%,
-            rgba(18, 18, 18, 1) 100%);
-    background: -webkit-linear-gradient(45deg,
-            rgba(28, 28, 28, 1) 0%,
-            rgba(28, 28, 28, 1) 20%,
-            rgba(18, 18, 18, 1) 20%,
-            rgba(18, 18, 18, 1) 35%,
-            rgba(13, 13, 13, 1) 35%,
-            rgba(13, 13, 13, 1) 50%,
-            rgba(10, 10, 10, 1) 50%,
-            rgba(10, 10, 10, 1) 65%,
-            rgba(13, 13, 13, 1) 65%,
-            rgba(13, 13, 13, 1) 80%,
-            rgba(18, 18, 18, 1) 80%,
-            rgba(18, 18, 18, 1) 100%);
-
-    background-attachment: fixed;
-    -webkit-background-attachment: fixed;
-    background-size: 100%;
+    color: #A3BD8E;
 }
 
 .text-clip {
