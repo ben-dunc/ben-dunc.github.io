@@ -9,6 +9,11 @@
 }
 
 @font-face {
+    font-family: "sono";
+    src: url(assets/fonts/Sono-Regular.woff2);
+}
+
+@font-face {
     font-family: "yesevaOne";
     src: url(assets/fonts/YesevaOne-Regular.ttf);
 }
@@ -25,20 +30,24 @@ body {
 }
 
 h1 {
-    font-size: 5em;
+    font-size: 3em;
+    padding-top: 15px;
     padding-bottom: 0;
     margin-bottom: 0;
+    color: #BF6168;
+    font-family: "sono";
 }
 
-h1,
 h2,
 h3 {
-    font-family: "yesevaOne";
+    padding-top: 15px;
+    color: #EACB8A;
+    font-family: "sono";
 }
 
 h2 {
-    margin-top: 75px;
-    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 0px;
     font-size: 3em;
 }
 
@@ -48,33 +57,39 @@ b {
 
 p.body {
     text-indent: 50px;
-    line-height: 1.7;
+    line-height: 1.4;
     margin: 0;
     padding: 0;
 }
 
 a:link {
-    color: #A3BD8E;
+    color: #9abee1;
 }
 
 a:visited {
-    color: #6f8b59;
+    color: #6189b1;
 }
 
 a:hover {
-    color: #d3e9c1;
+    color: #afcbe6;
 }
 
 a:active {
-    color: #A3BD8E;
+    color: #ffffff;
 }
 
 hr {
     color: white;
 }
 
+.title {
+    position: sticky;
+    bottom: 0;
+    padding-bottom: 15px;
+    background-color: #2E333F;
+}
+
 .projects {
-    min-height: 70vh;
     margin-bottom: 50px;
     padding: 5px;
     border-radius: 25px;
@@ -95,13 +110,13 @@ hr {
     padding: 15px;
     margin: 5px;
     background-color: #4D5668;
+    position: relative;
+
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 }
 
-.project-box-inner {
-    height: 270px;
-    border-radius: 15px;
-    background-image: url("/assets/placeholder.png");
-    background-size: cover;
+.large-project-box {
+    height: 50vh;
 }
 
 .project-image {
@@ -110,6 +125,14 @@ hr {
     left: 0;
     top: 0;
     z-index: -1;
+}
+
+.project-box-title {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+    font-size: large;
+    text-shadow: 0px 0px 1em black;
 }
 
 .tool-container {
@@ -133,12 +156,19 @@ hr {
 
     p {
         text-align: center;
-        font-family: "roboto-bold";
+        font-family: "sono";
+    }
+}
+
+.contact-me {
+    h2 {
+        color: #8aea9c;
     }
 }
 
 .credits {
-    margin-top: 150px;
+    margin-top: 50px;
+    color: rgb(132, 137, 150);
 }
 
 .f1 {
@@ -167,18 +197,4 @@ hr {
 
 .p25 {
     padding: 25px;
-}
-
-.color-light {
-    color: gray;
-}
-
-.color-accent {
-    color: #A3BD8E;
-}
-
-.text-clip {
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
 }
