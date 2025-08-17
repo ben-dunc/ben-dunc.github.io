@@ -27,6 +27,18 @@ body {
     padding: 16px;
     max-width: 1000px;
     width: calc(100vw - 32px);
+    font-size: 1em;
+}
+
+b {
+    font-family: "roboto-bold";
+}
+
+p.body {
+    text-indent: 50px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -51,17 +63,6 @@ h2 {
     font-size: 3em;
 }
 
-b {
-    font-family: "roboto-bold";
-}
-
-p.body {
-    text-indent: 50px;
-    line-height: 1.4;
-    margin: 0;
-    padding: 0;
-}
-
 a:link {
     color: #9abee1;
 }
@@ -78,10 +79,6 @@ a:active {
     color: #ffffff;
 }
 
-hr {
-    color: white;
-}
-
 .title {
     position: sticky;
     bottom: 0;
@@ -93,6 +90,7 @@ hr {
     margin-bottom: 50px;
     padding: 5px;
     border-radius: 25px;
+    font-size: inherit;
 }
 
 .project-row {
@@ -101,6 +99,7 @@ hr {
     width: 100%;
     padding: 0;
     margin: 0;
+    font-size: inherit;
 }
 
 .project-box {
@@ -114,7 +113,7 @@ hr {
 }
 
 .large-project-box {
-    height: 50vh;
+    height: 400px;
 }
 
 .project-image {
@@ -129,7 +128,7 @@ hr {
     position: absolute;
     left: 1em;
     bottom: 1em;
-    font-size: large;
+    /* font-size: large; */
     text-shadow: 0px 0px 1em black;
 }
 
@@ -145,7 +144,7 @@ hr {
     margin: 50px;
     justify-content: center;
     max-width: 100px;
-    width: 7vw;
+    width: 10%;
 
     img {
         width: 100%;
@@ -184,14 +183,13 @@ hr {
     flex-grow: 5;
 }
 
-.m0 {
-    margin: 0;
-}
+@media (max-width: 5in) {
+    body {
+        font-size: 1.5em;
+        margin: none;
+    }
 
-.p0 {
-    padding: 0;
-}
-
-.p25 {
-    padding: 25px;
+    h1 {
+        font-size: 3em;
+    }
 }
