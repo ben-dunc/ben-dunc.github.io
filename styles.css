@@ -27,7 +27,7 @@ body {
     padding: 16px;
     max-width: 1000px;
     width: calc(100vw - 32px);
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 b {
@@ -90,16 +90,14 @@ a:active {
     margin-bottom: 50px;
     padding: 5px;
     border-radius: 25px;
-    font-size: inherit;
 }
 
 .project-row {
     display: flex;
     flex-flow: row wrap;
-    width: 100%;
+    /* width: 100%; */
     padding: 0;
     margin: 0;
-    font-size: inherit;
 }
 
 .project-box {
@@ -128,8 +126,8 @@ a:active {
     position: absolute;
     left: 1em;
     bottom: 1em;
-    /* font-size: large; */
     text-shadow: 0px 0px 1em black;
+    font-size: 1rem;
 }
 
 .tool-container {
@@ -183,13 +181,31 @@ a:active {
     flex-grow: 5;
 }
 
-@media (max-width: 5in) {
+@media screen and (max-width: 720px) {
     body {
-        font-size: 1.5em;
+        font-size: 1.5rem;
         margin: none;
     }
 
     h1 {
-        font-size: 3em;
+        font-size: 3rem;
+    }
+
+    .project-row {
+        flex-flow: column wrap;
     }
 }
+
+/* On screens that are 992px or less, set the background color to blue */
+/* @media screen and (max-width: 992px) {
+    body {
+        background-color: blue;
+    }
+} */
+
+/* On screens that are 600px or less, set the background color to olive */
+/* @media screen and (max-width: 600px) {
+    body {
+        background-color: olive;
+    }
+} */
