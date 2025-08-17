@@ -26,7 +26,7 @@ body {
     margin: auto;
     padding: 16px;
     max-width: 1000px;
-    width: calc(100vw - 32px);
+    width: calc(100% - 32px);
     font-size: 1rem;
 }
 
@@ -64,11 +64,11 @@ h2 {
 }
 
 a:link {
-    color: #9abee1;
+    color: #bad5f0;
 }
 
 a:visited {
-    color: #6189b1;
+    color: #8bb2d9;
 }
 
 a:hover {
@@ -108,6 +108,7 @@ a:active {
     margin: 5px;
     background-color: #4D5668;
     position: relative;
+    /* box-shadow: 0 0 5px black inset; */
 }
 
 .large-project-box {
@@ -139,7 +140,7 @@ a:active {
 }
 
 .tool {
-    margin: 50px;
+    margin: 20px;
     justify-content: center;
     max-width: 100px;
     width: 10%;
@@ -183,29 +184,15 @@ a:active {
 
 @media screen and (max-width: 720px) {
     body {
-        font-size: 1.5rem;
+        /* font-size: 1.5rem; */
         margin: none;
     }
 
     h1 {
-        font-size: 3rem;
+        /* font-size: 3rem; */
     }
 
     .project-row {
         flex-flow: column wrap;
     }
 }
-
-/* On screens that are 992px or less, set the background color to blue */
-/* @media screen and (max-width: 992px) {
-    body {
-        background-color: blue;
-    }
-} */
-
-/* On screens that are 600px or less, set the background color to olive */
-/* @media screen and (max-width: 600px) {
-    body {
-        background-color: olive;
-    }
-} */
