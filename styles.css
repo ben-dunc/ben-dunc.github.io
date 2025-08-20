@@ -46,7 +46,7 @@ h1 {
     padding-top: 15px;
     padding-bottom: 0;
     margin-bottom: 0;
-    color: #BF6168;
+    color: #ff717b;
     font-family: "sono";
 }
 
@@ -64,7 +64,7 @@ h2 {
 }
 
 a:link {
-    color: #bad5f0;
+    color: #baddf0;
 }
 
 a:visited {
@@ -95,7 +95,6 @@ a:active {
 .project-row {
     display: flex;
     flex-flow: row wrap;
-    /* width: 100%; */
     padding: 0;
     margin: 0;
 }
@@ -108,11 +107,12 @@ a:active {
     margin: 5px;
     background-color: #4D5668;
     position: relative;
-    /* box-shadow: 0 0 5px black inset; */
+    box-shadow: 0 0 2px black inset;
+    flex-grow: 1;
 }
 
 .large-project-box {
-    height: 400px;
+    height: 50vh;
 }
 
 .project-image {
@@ -125,9 +125,10 @@ a:active {
 
 .project-box-title {
     position: absolute;
-    left: 1em;
-    bottom: 1em;
-    text-shadow: 0px 0px 1em black;
+    left: 0em;
+    bottom: 0em;
+    padding: 1em;
+    text-shadow: 0px 0px 1em #060c1a;
     font-size: 1rem;
 }
 
@@ -166,33 +167,26 @@ a:active {
     color: rgb(132, 137, 150);
 }
 
-.f1 {
-    flex-grow: 1;
-}
-
-.f2 {
-    flex-grow: 2;
-}
-
-.f3 {
-    flex-grow: 3;
-}
-
-.f5 {
-    flex-grow: 5;
-}
-
 @media screen and (max-width: 720px) {
     body {
         /* font-size: 1.5rem; */
         margin: none;
     }
 
-    h1 {
-        /* font-size: 3rem; */
+    h1,
+    h2 {
+        font-size: 2rem;
     }
 
     .project-row {
         flex-flow: column wrap;
+    }
+
+    .project-box {
+        height: 150px;
+    }
+
+    .large-project-box {
+        height: 50vh;
     }
 }
