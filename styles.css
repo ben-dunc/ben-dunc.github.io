@@ -1,3 +1,13 @@
+:root {
+    --background: #2E333F;
+    --background-light: #4D5668;
+    --text-primary: #E4EAF1;
+    --text-light: rgb(162, 168, 181);
+    --text-title: #ff717b;
+    --text-subtitle: #EACB8A;
+    --text-positive: #8aea9c;
+}
+
 @font-face {
     font-family: "roboto";
     src: url(assets/fonts/Roboto-Light.ttf);
@@ -20,12 +30,12 @@
 
 body {
     font-family: "roboto";
-    color: #E4EAF1;
-    background-color: #2E333F;
+    color: var(--text-primary);
+    background-color: var(--background);
 
     margin: auto;
     padding: 16px;
-    max-width: 1000px;
+    max-width: 700px;
     width: calc(100% - 32px);
     font-size: 1rem;
 }
@@ -44,16 +54,16 @@ p.body {
 h1 {
     font-size: 3em;
     padding-top: 15px;
-    padding-bottom: 0;
+    padding-bottom: 15px;
     margin-bottom: 0;
-    color: #ff717b;
+    color: var(--text-title);
     font-family: "sono";
 }
 
 h2,
 h3 {
     padding-top: 15px;
-    color: #EACB8A;
+    color: var(--text-subtitle);
     font-family: "sono";
 }
 
@@ -83,7 +93,7 @@ a:active {
     position: sticky;
     bottom: 0;
     padding-bottom: 15px;
-    background-color: #2E333F;
+    background-color: var(--background);
 }
 
 .projects {
@@ -105,9 +115,8 @@ a:active {
     border-radius: 20px;
     padding: 15px;
     margin: 5px;
-    background-color: #4D5668;
+    background-color: var(--background-light);
     position: relative;
-    box-shadow: 0 0 2px black inset;
     flex-grow: 1;
 }
 
@@ -128,7 +137,7 @@ a:active {
     left: 0em;
     bottom: 0em;
     padding: 1em;
-    text-shadow: 0px 0px 1em #060c1a;
+    text-shadow: 0px 0px 1em var(--background);
     font-size: 1rem;
 }
 
@@ -158,18 +167,17 @@ a:active {
 
 .contact-me {
     h2 {
-        color: #8aea9c;
+        color: var(--text-positive);
     }
 }
 
 .credits {
     margin-top: 50px;
-    color: rgb(132, 137, 150);
+    color: var(--text-light);
 }
 
 @media screen and (max-width: 720px) {
     body {
-        /* font-size: 1.5rem; */
         margin: none;
     }
 
@@ -189,4 +197,37 @@ a:active {
     .large-project-box {
         height: 50vh;
     }
+}
+
+/* Set your aspect ratio */
+.video-container {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: 56.25%;
+    margin: auto;
+    /* creates a 16:9 aspect ratio */
+}
+
+.video-container iframe,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+/* And set the max-width of the parent element */
+.video-wrap {
+    padding: 20px 0;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.text-label {
+    text-align: center;
+    color: var(--text-light);
 }
