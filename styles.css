@@ -127,11 +127,12 @@ a:active {
     background-color: var(--background-light);
     position: relative;
     flex-grow: 1;
-    /* mask-clip: ; */
+    flex-basis: min-content;
     object-fit: cover;
     overflow: hidden;
     justify-content: center;
     align-content: center;
+    color: white;
 }
 
 .large-project-box {
@@ -139,8 +140,13 @@ a:active {
 }
 
 .project-image {
+    position: absolute;
+    min-height: 100%;
+    /* min-width: 100%; */
     width: 100%;
-    /* height: 100%; */
+    top: 0;
+    left: 0;
+    /* transform: translateX(-25%); */
     object-fit: cover;
 }
 
@@ -151,14 +157,13 @@ a:active {
     padding: 1em;
     font-size: 1rem;
     font-weight: 900;
+    text-shadow: 0px 0px 1em var(--text-dark);
+    color: white;
 }
 
 .project-box-title.text-dark {
     text-shadow: 0px 0px 1em var(--text-light);
-}
-
-.project-box-title.text-light {
-    text-shadow: 0px 0px 1em var(--text-dark);
+    color: var(--text-dark);
 }
 
 .tool-container {
@@ -197,7 +202,7 @@ a:active {
 }
 
 @media screen and (max-width: 720px) {
-    body {
+    /* body {
         margin: none;
     }
 
@@ -208,15 +213,15 @@ a:active {
 
     .project-row {
         flex-flow: column wrap;
-    }
+    } */
 
-    .project-box {
+    /* .project-box {
         height: 150px;
     }
 
     .large-project-box {
         height: 50vh;
-    }
+    } */
 }
 
 /* Set your aspect ratio */
