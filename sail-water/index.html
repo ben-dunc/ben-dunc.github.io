@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Benjamin Duncan - Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../../spacing.css">
+    <link rel="icon" type="image/x-icon" href="assets/page_icon_pink.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+    <div class="article">
+        <p class="home-nav">
+            <a href="/">home</a>
+        </p>
+        <h1 class="pt-0">Mobile-Efficient Ocean Waves in Sail VR</h1>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-720.gif">
+            </div>
+            <p class="text-label">
+                Water in Sail VR with an example ship bobbing up & down with the waves. Note how the ship doesn't tilt. This
+                is to prevent motion sickness in our players.
+            </p>
+        </div>
+        <!-- SETUP -->
+        <h3>Water In Sail VR</h3>
+        <p class="body">
+            Sail VR is a virtual reality video game written with Unity for the Meta Quest devices. The game encourages
+            players to live the life of a pirate, looting islands, treasure hunting, and engaging in battles on the open
+            sea. The ocean is a critical part of the game, not only being the largest environment but also the host of many
+            exciting activites such as PVP ship combat, boss battles, and NPC ship battles.
+            I was tasked with implementing a custom water shader that would:
+        <ul>
+            <li>be beautiful</li>
+            <li>provide massive waves to bring more life into water combat</li>
+            <li>and be performant on the Meta Quest 2/3S/3</li>
+        </ul>
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-before-after.gif">
+            </div>
+            <p class="text-label">
+                What the water was (left) vs what the water became (right)
+            </p>
+        </div>
+
+        <h3>The Challenge</h3>
+        <p class="body">
+            My previous attempt at bringing life to the water in Sail VR fell short of my expectations. There were two
+            principle
+            reasons for this: I didn't know how to code HLSL shaders in Unity URP, and I attempted to implement the vertex
+            displacement on the CPU. Per-frame vertex displacement on the CPU didn't do very well. Not only was it slow and
+            non performant, it would also lead to crashes. In addition to being a new shader programmer, I was working with
+            very
+            limited hardware. The Quest 2 - the oldest Meta Quest device that we support - is slower than many mobile
+            phones. In addition, our game was already running poorly, consistently having an FPS much lower than our goals.
+            It wasn't abnormal to play with a 40-50 FPS due to a maxed out GPU. The greatest performance hit was the old
+            water shader we were using, one that we got from the Unity Asset Store.
+        </p>
+
+        <h3>Vertex Displacment</h3>
+        <p class="body">
+            After learning about shaders via a Udemy course and after getting some practice in with our other game, <a target="_blank" href="https://www.meta.com/experiences/monsters-and-mazes/9972710149415118/">Monsters And
+                Mazes</a>, I felt more ready to implement a custom water shader that would be optmized specifically for the
+            Quest 2. I took an approach similar to a
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Trochoidal_wave">Trochoidal or Gerstner wave</a>.
+            Gerstner waves mimic the displacment of particles of water in a vertical and horizontal direction. They are used
+            in diverse computer graphics to simulate waves.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/Forces_in_Trochoidal_wave.gif">
+            </div>
+            <p class="text-label">
+                A single 2D Gerstner wave. Each particle is displaced in a circular motion, along the direction of the wave.
+                Image credit goes to <a target="_blank" href="https://en.wikipedia.org/wiki/Trochoidal_wave">Wikipedia.</a>
+            </p>
+        </div>
+        <p class="body">
+            One Gerstner wave looks simple and smooth (see above). However, ocean waves are chaotic and varied, layering
+            many large and
+            small waves. To simulate the ocean, you have to layer multiple Gerstner waves atop one another, each with
+            varying parameters. In implementing this shader, I found that the Quest 2 was performance bound by two things:
+            number of
+            vertices and number of Gerstner waves. I wished to cram in as many vertices as I could into the
+            water planes but that simply wasn't possible. The GPU could not compute the wave displacement for
+            every vertex. To combat this, I implemented a level of detail system. Our water surface is separated into
+            concentric rings of planes, the inner having a greater vertex density and the outer having a lower vertex
+            density. When the player moves around, we shift this water grid to the position of the player. With this method,
+            the player always has the highest level of detail immediately in front of them. I budgeted around 15-20k
+            vertices in the player's view at a time, utilizing frustrum culling. This increased the amount of displaced
+            vertices 10X.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-vertices-720.gif">
+            </div>
+            <p class="text-label">
+                An overhead view of the water planes. Note how the center (bottem left) has more vertices than the planes
+                further away.
+            </p>
+        </div>
+        <p class="body">
+            After finding a simplified Gerstner wave algorithm online, I was able to implement and debug it to match our
+            needs. The Quest 2 was able to support 10 layered Gerstner waves with this many vertices. Although this is a
+            small amount in comparison to other games, this worked just fine for us. The largest of these waves represented
+            the colossal waves that players get to boat over and the smallest of them fit just perfectly despite our small
+            vertex density. If the wave frequency became any smaller, it would no longer be able to be represented by our
+            sparse vertices, resulting in odd and erratic vertex displacement.
+        </p>
+        <p class="body">
+            Since GPU vertex displacement doesn't affect physics, I had to replicate the displacement algorithm perfectly
+            for the CPU to execute it for ships, floatables, and the player. Both the GPU & CPU use the exact same
+            algorithm. The GPU runs it for every vertex and the CPU runs it only for points of interest such as ships,
+            players, or floating objects.
+        </p>
+
+        <h3>Dynamic Wave Intensity</h3>
+        <p class="body">
+            Players in our game can expect to find a wide range of waves, from very tumultuous to very calm. This provides a
+            degree of variety to players. This was done by interpolating each of the 10 Gerstner waves' intensities across 3
+            points. The "storminess" value ranges from 0 - 1 and is determined by a Perlin 1D noise function.
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-storminess-720.gif">
+            </div>
+            <p class="text-label">
+                Here I'm manually adjusting the intensity of the waves. They range from very stormy to very calm. The waves
+                change slowly and constantly in-game.
+            </p>
+        </div>
+        </p>
+
+        <h3>Dynamic Day/Night Lighting</h3>
+        <p class="body">
+            Our game provides a full 30 minute day/night cycle. We have two realtime lights, the moon and the sun. In order
+            to boast some beauty, I implemented posterized diffuse lighting, specular lighting, realtime environmental
+            reflections, and subsurface scattering.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-daynight.gif">
+            </div>
+            <p class="text-label">
+                A full day/night cycle in Sail. Note the different types of lighting: diffuse, specular, realtime
+                environmental reflections, and subsurface scattering (at the sunset).
+            </p>
+        </div>
+
+        <p class="home-nav pt-16">
+            <a href="/">home</a>
+        </p>
+    </div>
+</body>
+
+</html>

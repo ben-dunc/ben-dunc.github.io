@@ -29,16 +29,10 @@
     src: url(assets/fonts/YesevaOne-Regular.ttf);
 }
 
-body {
-    font-family: "roboto";
-    color: var(--text-primary);
+body,
+html {
     background-color: var(--background);
-
-    margin: auto;
-    padding: 16px;
-    max-width: 700px;
-    width: calc(100% - 32px);
-    font-size: 1rem;
+    margin: 0;
 }
 
 b {
@@ -88,6 +82,18 @@ a:hover {
 
 a:active {
     color: #ffffff;
+}
+
+.article {
+    font-family: "roboto";
+    color: var(--text-primary);
+    background-color: var(--background);
+
+    margin: auto;
+    padding: 16px;
+    max-width: 700px;
+    width: calc(100% - 32px);
+    font-size: 1rem;
 }
 
 .text-light {
