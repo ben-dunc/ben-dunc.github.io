@@ -10,72 +10,87 @@
 </head>
 
 <body>
-    <p class="home-nav">
-        <a href="/">home</a>
-    </p>
-    <h1 class="pt-0">BYU 2024 University Rover Challenge</h1>
-    <p class="body">
-        I was lucky enough to participate in the 2024 Mars Rover challenge with many talented students. The University
-        Rover Challenge is an annual
-        competition involving over 100 teams from 15 countries. BYU has done well in this competition in the past. In
-        2024, we scored 3rd place.
-    </p>
-    <div class="video-wrap">
-        <div class="video-container">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/EA7o8R7zuKs?autoplay=1&mute=1" title="BYU Mars Rover - System Acceptance Review (SAR) - URC 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
+    <div class="article">
+        <p class="home-nav">
+            <a href="/">home</a>
+        </p>
+        <h1 class="pt-0">BYU 2024 University Rover Challenge</h1>
+        <p class="body">
+            I was lucky enough to participate in the 2024 Mars Rover challenge with many talented students. The
+            University
+            Rover Challenge is an annual
+            competition involving over 100 teams from 15 countries. BYU has done well in this competition in the past.
+            In
+            2024, we scored 3rd place.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/EA7o8R7zuKs?autoplay=1&mute=1"
+                    title="BYU Mars Rover - System Acceptance Review (SAR) - URC 2024" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-label">
+                Technical details of the BYU 2024 Mars Rover
+            </p>
         </div>
-        <p class="text-label">
-            Technical details of the BYU 2024 Mars Rover
+        <!-- THE CHALLENGE -->
+        <p class="body">
+            The University Rover Challenge includes four parts: extreme delivery, autonomous navigation, equipement
+            servicing, and a science task.
+            You can find information about each of the missions <a target="_blank"
+                href="https://urc.marssociety.org/home/requirements-guidelines">here</a>.
+            My part was in the autonomy mission where the rover had to navigate autonomously to various GPS points. The
+            terrain began smooth but quickly entered challenging rocky & hilly terrain.
+            Not only did the rover need to navigate over this bumpy terrain with its mechanical rocker-bogey system but
+            it
+            also needed to avoid larger obstacles and steep hills that it couldn't handle directly. This was a major
+            challenge for us. In addition to navigating this difficult terrain, the rover had to identify and approach
+            different objects such as a water bottle and an orange mallet.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="../../assets/images/urc-detection.gif">
+            </div>
+            <p class="text-label">
+                The rover detecting and avoiding obstacles using an obstacle detection and path finding algorithm
+            </p>
+        </div>
+        <!-- MY PART -->
+        <p class="body">
+            In order to address these concerns, we opted for an obstacle detection system paired with an DNN object
+            recognition system. The project itself is built
+            in Python ROS (Robot Operating System) running on an NVidia Jetson Orin. I headed the obstacle detection
+            system.
+            Because this is a
+            project that is passed from one
+            graduating class to another, I started by fixing the old obstacle detection system that hadn't been touched
+            for
+            a few years. It was in pretty rough shape, throwing many false positives at random. The solution came about
+            as I
+            endeavored to understand, organize, and minimize the old code. Despite this being a new subject to me, I was
+            able to understand how the object detection algorithm worked (Used OpenCV) and adjust the parameters to be
+            capable of detecting hazardous objects in our path. Gratefully, the obstacle detection algorithm performed
+            admirably.
+        </p>
+        <!-- LESSONS -->
+        <p class="body">
+            I learned a lot during the course of this project. To be frank, I was a little surprised to be accepted into
+            this sought after team. I learned so much from both my experiences as well as the people on the team itself.
+            The
+            dedication, interest, motivation, knowldge, and diligence that they showed have left a lasting impact on me.
+            The
+            project and techincal skills required taught me a lot as well. I had to learn about ROS, local networks, RF
+            transmitters and receivers, (even more) linux commands, vim, OpenCV, blob detection, guassian blurs,
+            sterioscopic cameras, obstacle detection, and working cohesively in a large group. I'm grateful to have
+            learned
+            as much as I did and am proud of my critical work.
+        </p>
+        <p class="home-nav pt-16">
+            <a href="/">home</a>
         </p>
     </div>
-    <!-- THE CHALLENGE -->
-    <p class="body">
-        The University Rover Challenge includes four parts: extreme delivery, autonomous navigation, equipement
-        servicing, and a science task.
-        You can find information about each of the missions <a target="_blank" href="https://urc.marssociety.org/home/requirements-guidelines">here</a>.
-        My part was in the autonomy mission where the rover had to navigate autonomously to various GPS points. The
-        terrain began smooth but quickly entered challenging rocky & hilly terrain.
-        Not only did the rover need to navigate over this bumpy terrain with its mechanical rocker-bogey system but it
-        also needed to avoid larger obstacles and steep hills that it couldn't handle directly. This was a major
-        challenge for us. In addition to navigating this difficult terrain, the rover had to identify and approach
-        different objects such as a water bottle and an orange mallet.
-    </p>
-    <div class="video-wrap">
-        <div class="video-container">
-            <embed src="../../assets/images/urc-detection.gif">
-        </div>
-        <p class="text-label">
-            The rover detecting and avoiding obstacles using an obstacle detection and path finding algorithm
-        </p>
-    </div>
-    <!-- MY PART -->
-    <p class="body">
-        In order to address these concerns, we opted for an obstacle detection system paired with an DNN object
-        recognition system. The project itself is built
-        in Python ROS (Robot Operating System) running on an NVidia Jetson Orin. I headed the obstacle detection system.
-        Because this is a
-        project that is passed from one
-        graduating class to another, I started by fixing the old obstacle detection system that hadn't been touched for
-        a few years. It was in pretty rough shape, throwing many false positives at random. The solution came about as I
-        endeavored to understand, organize, and minimize the old code. Despite this being a new subject to me, I was
-        able to understand how the object detection algorithm worked (Used OpenCV) and adjust the parameters to be
-        capable of detecting hazardous objects in our path. Gratefully, the obstacle detection algorithm performed
-        admirably.
-    </p>
-    <!-- LESSONS -->
-    <p class="body">
-        I learned a lot during the course of this project. To be frank, I was a little surprised to be accepted into
-        this sought after team. I learned so much from both my experiences as well as the people on the team itself. The
-        dedication, interest, motivation, knowldge, and diligence that they showed have left a lasting impact on me. The
-        project and techincal skills required taught me a lot as well. I had to learn about ROS, local networks, RF
-        transmitters and receivers, (even more) linux commands, vim, OpenCV, blob detection, guassian blurs,
-        sterioscopic cameras, obstacle detection, and working cohesively in a large group. I'm grateful to have learned
-        as much as I did and am proud of my critical work.
-    </p>
-    <p class="home-nav pt-16">
-        <a href="/">home</a>
-    </p>
 </body>
 
 </html>

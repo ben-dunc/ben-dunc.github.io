@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Benjamin Duncan - Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../spacing.css">
+    <link rel="icon" type="image/x-icon" href="../assets/icons/page_icon_pink.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+    <div class="article">
+        <p class="home-nav">
+            <a href="/">home</a>
+        </p>
+        <h1 class="pt-0">Maze-Solving Deep Neural Net</h1>
+        <p class="body">
+            <i>
+                I've taken the following article from my final project submission written in Nov 2023 for CS 474 -
+                Introduction To Deep
+                Learning.
+                The code for this project was done in Google Colab and can be found <a
+                    href="https://colab.research.google.com/drive/1_LQRpeeB9a20eOPVUBKy3H-Y9mNorhO9?usp=sharing">here</a>.
+            </i>
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/maze-success.gif">
+            </div>
+            <p class="text-label">
+                A deep neural net solves a pre-generated maze.
+            </p>
+        </div>
+        <hr>
+        <h3>Summary</h3>
+        <p class="body">
+            This was a technical project done for CS 474 - Introduction to Deep Learning taught by Dr
+            Wingate. Our assignment was to choose a project related to deep learning that would provide
+            enough of a challenge for us to learn. My choice was deep reinforcement learning. I’ve always
+            been curious about how to teach computers to achieve an abstract task and this seems like a
+            great way to do it. Specifically, I chose to do a very bare-bones approach to this. I was
+            intimidated by many examples online of DeepRL models playing minecraft or Starcraft. At first, I
+            thought to use the Godot game engine to create an environment. However, I scratched that idea
+            in favor of doing something even more bare-bones, using an environment that required no
+            physics calculations and had minimal actions to take. To fulfill those requirements, I chose to
+            create a maze that the model would learn to go through.
+        </p>
+        <h3>Dataset Source</h3>
+        <p class="body">
+            Because this is a DeepRL task, there wasn’t any pre-built dataset to work with. Instead, I
+            needed to create an environment that the model could play through. To do so, I implemented
+            <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">Wilson's algorithm</a> in a python class.
+            This allowed me to generate any size maze with any seed.
+            It was perfect for creating an environment. I opted for 4 agent actions: up, right, down, and left.
+            Furthermore, I used a similar approach to the DQN in lab 10 except that I made a custom
+            environment using the open ai gymnasium library. Luckily, there was a simple tutorial that I
+            found online to make it.
+        </p>
+        <h3>Technical Approach</h3>
+        <p class="body">
+            The biggest implementation challenges that I tackled were the implementation of a custom
+            gymnasium environment, a maze generator, and a custom DQN model. <a
+                href="https://colab.research.google.com/drive/1_LQRpeeB9a20eOPVUBKy3H-Y9mNorhO9?usp=sharing">Here is my
+                colab code.</a>
+            Most of my ability to do this project came from lab 10 where we programmed a DQN model to
+            play cart-pole in the gymnasium environment.
+        </p>
+        <h3>Gymnasium Environment</h3>
+        <p class="body">
+            I employed the example and tutorial found on the <a
+                href="https://gymnasium.farama.org/tutorials/gymnasium_basics/environment_creation/">gymnasium
+                documentation website</a>. It was
+            perfectly suited to my needs because the tutorial walked through how to create a “grid world”. I
+            simply had to modify the reset and step functions to generate a maze with a given size & seed
+            and to prevent the agent from walking through walls. As I stated above, I opted for four actions:
+            up, right, down, left. The agent always started in the top left, and the goal was always in the
+            bottom right. It was pretty simple in concept. I chose to try out 3 training regimes:
+        <ol>
+            <li>Give -1 to all actions except finding the end which resulted in 0.</li>
+            <li>Give -5 for walking into a wall, 10 for reaching the end, and 0 otherwise.</li>
+            <li>Give -1 for backtracking, -5 for moving towards a wall, 10 for reaching the end, and 0
+                otherwise.</li>
+        </ol>
+        </p>
+        <h3>Maze Generator</h3>
+        <p class="body">
+            I must admit that this was one of the more fun parts of this project. I really enjoy procedural
+            generation. Anyways, I programmed this maze generator on my local computer to generate
+            mazes with any size in a square given any seed. I made it flexible enough to create a numeric
+            version of the maze or one represented with characters. You can see my original code <a
+                href="https://github.com/ben-dunc/maze_generator">here</a>. I
+            did modify it slightly to work better with the rest of the colab code which you can find linked
+            under the section 3 header. I was proud that it could generate any size of maze. You can view
+            more examples <a
+                href="https://drive.google.com/drive/folders/161ep6iOVQbEZ5KDhou99W82RKWcFrAZq?usp=share_link">here</a>.
+            Note that the default maze I used was a 20x20 maze with seed=0. In fact,
+            I only used a 20x20 maze. In some cases, I tried to randomize the seeds as I was training it but
+            it didn’t give any good results.
+        </p>
+        <h3>DQN Model</h3>
+        <p class="body">
+            I tried to keep my DQN model as close as possible to the original DQN model described in
+            <i><a href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">Atari With Deep Reinforcement Learning</a></i>.
+            The model layers followed this format:
+            convolutional with 16 4x4 filters, ReLU, convolutional with 32 2x2 filters, ReLU, directly
+            connected layers, and finally another directly connected layer with a size equal to the amount of
+            actions - four in this case. I made a silly mistake and forgot to include the ReLUs in the model
+            until very late in the process. Regardless of this, I was able to get successful results during a
+            modicum amount of time. In addition to using the original DQN layer structure, I modified it to
+            adapt to any size of maze that I wanted to use. This was because I was planning on trying out
+            many different sizes of mazes once I had dialed in the hyperparameters well on a 20x20 maze. I
+            used the Adam Pytorch implementation for training. The model ended up having 4 hyper
+            parameters (state_size, num_channels, action_size, batch_size). The state size indicated how
+            large the maze was. num_channels indicated how many channels it would have, with each
+            channel representing an observation of the state at that point in time. action_size was how large
+            our action space was or how many actions we could take. In this case, action_size = 4.
+            batch_size was the size of batches. With state_size=20, num_channels=2, action_size=4, and
+            batch_size=16, the model had a total of 19764 parameters. I did not use any pre-trained
+            weights. Because I did DeepRL, I didn’t have any loss and the reward varied depending on the
+            training regime I used. You can view the training regimes in section 3.1. To be honest, I’m not
+            sure if I overfitted or not. I’m not entirely sure what that would look like for a DQN model.
+        </p>
+        <h3>Results</h3>
+        <p class="body">
+            The results are varied and unpredictable. Unfortunately, I was unable to find hyper parameters
+            that allowed me to get consistent results. However, I was able to get some successful training
+            done just after I had finished coding everything. You can view the resulting mp4 video output
+            <a href="https://drive.google.com/drive/folders/1rrZr9Os4Sm5q1hPJXzXJX_ls0rZU_E6g?usp=share_link">here</a>.
+            I’ve included some examples of successes and failures. Despite having received some
+            success, I quickly moved on to trying other hyper parameters and training regimes. From there, I
+            wasn’t able to gain any other successful run. The general failure result (see failure example below) was one
+            in
+            which the model learned to simply move back and forth, avoiding walls, to minimize negative
+            reward. I essentially trained it to avoid walls. I believe that this resulted in the fact that it was
+            very rare for the model to actually reach the end during its training phase and subsequently
+            receive the reward. Without the reinforcement from the reward, it simply learned to minimize the
+            damage. Additionally, some training resulted in the agent not moving at all. I’m not entirely sure
+            what is happening here but it may have been because I forgot the ReLU layers in my model.
+        </p>
+        <p class="body">
+            I wish that I had more time to fiddle with the hyper parameters before submitting the
+            assignment. There were some other challenges that I wanted to pit the agent against if it was
+            successful early. When I received those few successes, I thought that I was going to have the
+            opportunity to use them. Here were some of my ideas:
+        </p>
+        <ol>
+            <li>Train the model using random mazes. I wasn't really sure if this could work but I thought that it would
+                be very interesting to try.</li>
+            <li>Add other incentives into the environment such as enemies or bonuses (such as pac-man cherries)</li>
+            <li>Very large mazes</li>
+            <li>Random starting/ending locations. In fact, this may have solved the issue of the model not receiving the
+                reward of finding the end. If it was randomized, there may have been a greater chance for the model to
+                be rewarded.</li>
+            <li>Attempt a training regime in which the model is rewarded for how close it is the end in manhattan space.
+                This woul dneed some refinement to avoid having the agent simply get as close as it can and then bask in
+                the rewards in some dead-end.</li>
+        </ol>
+
+        <div class="video-wrap">
+            <div class="video-container">
+                <video controls loop muted autoplay src="/assets/images/maze-success.mp4">
+            </div>
+            <p class="text-label">
+                An iteration in which the DNN solved the maze.
+            </p>
+        </div>
+
+        <div class="video-wrap">
+            <div class="video-container">
+                <video controls loop muted autoplay src="/assets/images/maze-failure.mp4">
+            </div>
+            <p class="text-label">
+                An iteration in which the DNN failed to solve the maze.
+            </p>
+        </div>
+
+        <hr>
+        <p class="body">
+            <i>I thoroughly enjoyed this project back in college. I hope that I get back into coding neural nets in the
+                future.</i>
+        </p>
+        <p class="home-nav pt-16">
+            <a href="/">home</a>
+        </p>
+    </div>
+</body>
+
+</html>
