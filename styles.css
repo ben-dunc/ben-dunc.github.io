@@ -52,6 +52,10 @@ p.body {
     padding: 0;
 }
 
+li {
+    margin-top: 5px;
+}
+
 h1 {
     font-size: 3em;
     padding-top: 15px;
