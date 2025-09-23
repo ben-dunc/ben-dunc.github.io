@@ -5,7 +5,8 @@
     --text-light: rgb(162, 168, 181);
     --text-dark: #070d1d;
     --text-title: #ff717b;
-    --text-subtitle: #EACB8A;
+    --text-subtitle: #eaa48a;
+    --text-subsubtitle: #EACB8A;
     --text-positive: #8aea9c;
 }
 
@@ -65,12 +66,17 @@ h2 {
     margin-top: 15px;
     margin-bottom: 0px;
     font-size: 1.5em;
+    color: var(--text-subtitle);
+}
+
+h3 {
+    color: var(--text-subsubtitle);
+    margin-bottom: 5px;
 }
 
 h2,
 h3 {
     padding-top: 15px;
-    color: var(--text-subtitle);
     font-family: "sono";
 }
 

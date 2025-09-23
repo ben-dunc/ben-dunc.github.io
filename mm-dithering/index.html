@@ -20,39 +20,59 @@
                 <embed src="/assets/images/mm-dithering.gif">
             </div>
             <p class="text-label">
-                Technical details of the BYU 2024 Mars Rover
+                The dithering effect in the backrooms-inspired maze in Monsters And Mazes
             </p>
         </div>
         <!-- THE CHALLENGE -->
         <p class="body">
-            In Red Team Interactive's game, <a target="_blank" href="https://www.meta.com/en-gb/experiences/monsters-and-mazes/9972710149415118/">Monsters & Mazes</a>, players compete in PvP matches. At the beginning of every round, one player is
-            chosen to be the monster. All other players must explore the maze, accomplish an objective, and escape within a time limit.
-            The monster and its abilities are unique to every maze. In our backrooms-inspired maze, the monster is the smilier has has the ability to
+            In Red Team Interactive's game, <a target="_blank"
+                href="https://www.meta.com/en-gb/experiences/monsters-and-mazes/9972710149415118/">Monsters & Mazes</a>,
+            players compete in PvP matches. At the beginning of every round, one player is
+            chosen to be the monster. All other players must explore the maze, accomplish an objective, and escape
+            within a time limit.
+            The monster and its abilities are unique to every maze. In our backrooms-inspired maze, the monster is the
+            smilier has has the ability to
             travers walls for a limited time.
         </p>
         <h3>The problem</h3>
         <p class="body">
-            Removing the colliders on the walls so that the player who is playing as the monster can move through them is pretty easy. However, we wanted a dissolve effect in our game. As the "shader guy" in our studio, this was my task: <b>how to make a dithering shader that was both performant and interesting on a Quest 2.</b>
-            There were two main optimization considerations: (1) dithering can have major performance impacts when objects are layered on top of one another, forcing the GPU to redraw a pixel and
-            (2) our game included a real-time light - a head lamp on the player's head - which can be intensive on the Quest 2 GPU.
+            Removing the colliders on the walls so that the player who is playing as the monster can move through them
+            is pretty easy. However, we wanted a dissolve effect in our game. As the "shader guy" in our studio, this
+            was my task: <b>how to make a dithering shader that was both performant and interesting on a Quest 2.</b>
+            There were two main optimization considerations: (1) dithering can have major performance impacts when
+            objects are layered on top of one another, forcing the GPU to redraw a pixel and
+            (2) our game included a real-time light - a head lamp on the player's head - which can be intensive on the
+            Quest 2 GPU.
         </p>
         <h3>Poor Performance With Unity's ShaderGraph</h3>
         <p class="body">
-            When I approached this problem, I figured that I would use Unity's ShaderGraph for an easy and simple implementation. However, this was not at all performant in a dithering shader and when receiving the player's headlamp.
-            This was because ShaderGraph <i>appears</i> to discard (the dither operation) the fragement after all of the lighting calculations & texture reads and ShaderGraph only supports <i>URP's Lit</i> (vs URP's Simple Lit) lighting calculations.
-            This, of course, has a huge impact on our performance. Not only were we forcing the GPU to calculate multiple entire fragments before per pixel but we were also using complex lighting calculations for mobile hardware.
+            When I approached this problem, I figured that I would use Unity's ShaderGraph for an easy and simple
+            implementation. However, this was not at all performant in a dithering shader and when receiving the
+            player's headlamp.
+            This was because ShaderGraph <i>appears</i> to discard (the dither operation) the fragement after all of the
+            lighting calculations & texture reads and ShaderGraph only supports <i>URP's Lit</i> (vs URP's Simple Lit)
+            lighting calculations.
+            This, of course, has a huge impact on our performance. Not only were we forcing the GPU to calculate
+            multiple entire fragments before per pixel but we were also using complex lighting calculations for mobile
+            hardware.
         </p>
         <h3>The Solution</h3>
         <p class="body">
-            The solution for these two problems was simple: create a custom shader that supported a discard early in the fragment shader and utilize the mobile-friendtly lighting calculations in URP's Simple Lit.
-            To do this, I duplicated the SimpleLit.shader within the URP package, modified it to meet our needs (triplaner projection) and then created a custom early-fragment discard. The shader discards the fragment if the player is too close.
-            A noise texture is sampled according to triplaner UVs to create the dissolving effect and some coloring is applied near the discard threshold.
+            The solution for these two problems was simple: create a custom shader that supported a discard early in the
+            fragment shader and utilize the mobile-friendtly lighting calculations in URP's Simple Lit.
+            To do this, I duplicated the SimpleLit.shader within the URP package, modified it to meet our needs
+            (triplaner projection) and then created a custom early-fragment discard. The shader discards the fragment if
+            the player is too close.
+            A noise texture is sampled according to triplaner UVs to create the dissolving effect and some coloring is
+            applied near the discard threshold.
             The result is the dithering effect you can see in the gif above.
         </p>
         <p class="body">
-            The final result was <i>much</i> more performant. Before, when the player activated the monster's ability, the FPS would drop to 30 FPS.
+            The final result was <i>much</i> more performant. Before, when the player activated the monster's ability,
+            the FPS would drop to 30 FPS.
             In addition, the GPU utilization would sky-rocket.
-            After I implemented our own shader, the FPS was a stable 72 FPS and the GPU utilization was impacted marginally.
+            After I implemented our own shader, the FPS was a stable 72 FPS and the GPU utilization was impacted
+            marginally.
             This allowed our player base to enjoy the game to its fullest without any drops in frames!
         </p>
         <p class="home-nav pt-16">

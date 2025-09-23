@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Benjamin Duncan - Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../../spacing.css">
+    <link rel="icon" type="image/x-icon" href="../assets/icons/page_icon_pink.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+    <div class="article">
+        <p class="home-nav">
+            <a href="/">home</a>
+        </p>
+        <h1 class="pt-0">Unity ECS On Quest 2</h1>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/ecs-boids.gif">
+            </div>
+            <p class="text-label">
+                The boids test in ECS
+            </p>
+        </div>
+        <p>
+            <a href="https://github.com/ben-dunc/Quest-ECS-Demo">GitHub</a>
+        </p>
+        <p class="body">
+            At Red Team Interactive, we've been considering using Unity 6's Entity Component System (ECS) for mobile VR.
+            It boasts incredible performance on both the CPU and the GPU with many entities, even in a multiplayer game.
+            As all of the games we make are multiplayer, we love the idea of being able to create larger, more immersive
+            worlds for more and more individuals.
+        </p>
+        <p class="body">
+            We did a foray into the system to see how much of a performance gain it would give us. In our test, there
+            are 3 situations, each with an ECS implementation and an Game Object System (GOS) implementation. The 3
+            questions that we wanted answered by the situations were:
+        <ul>
+            <li>How many animated skinned mesh entities could each system handle? (low simulation, high rendering)</li>
+            <li>How many boids (in a <a href="https://en.wikipedia.org/wiki/Boids">classical 3D boid simulation</a>)
+                could each system handle? (high simulation, low rendering)</li>
+            <li>How many simple-logic dynamic objects could each system handle? (low simulation, low rendering)</li>
+        </ul>
+        </p>
+        <h3>⚠️ Disclaimer ⚠️</h3>
+        <p class="body">
+            I made this project as I was learning about ECS, Unity Jobs, and shaders. There are improvements that can be
+            made to each of the tests. Regardless, I believe that these tests indicate the great potential that ECS has
+            for mobile VR.
+        </p>
+        <h3>Test Setup</h3>
+        Each test is done on-device with a Quest 2 and a Quest 3. Each GOS implementation uses jobs to manage all of the
+        objects. During each test, the number of entities or objects were increased until the average FPS dropped below
+        72 on either the Quest 2 or Quest 3. ECS greatly outperformed GOS by 2-30x. All images/gifs of these tests are
+        ECS implementations.
+
+        <h2>Test 1 - Animated Skinned Mesh Entities</h2>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/ecs-zombies.gif">
+            </div>
+            <p class="text-label">
+                Technical details of the BYU 2024 Mars Rover
+            </p>
+        </div>
+        <p class="body">
+            This test was born from our idea about a 3D shoot 'em up, bullet hell, extraction zombie shooter in VR:
+            Z-Route. The idea is that players would go out into a post-apocalyptic environment where zombies run wild.
+            The players would drive a weaponized school bus to their mission objective, complete the objective, and then
+            return to base. Our hope is that there would be masses of zombies that the players could mow down, explode,
+            or destroy in whichever way they fancy.
+        </p>
+        <p class="body">
+            The test involves spawning as many animated zombies as possible within an area. Both the ECS and the GOS
+            have a similar setup: spawn zombies that move forward in circles. The ECS version utilizes an free GPU-based
+            ECS animator asset from the Unity Asset Store. The GOS implementation uses the built-in animator as well as
+            jobs to move the zombies.
+        </p>
+        <h3>Test Results</h3>
+        <p class="body">
+
+            The ECS implementation outperformed the GOS implementation by about 2x on the Quest 2 and about 3x on the
+            Quest
+            3.
+        <ul>
+            <li>Quest 2 ECS: 1k entities</li>
+            <li>Quest 3 ECS: 1.7k objects</li>
+            <li>Quest 2 GOS: 650 entities (CPU bound)</li>
+            <li>Quest 3 GOS: 650 objects (CPU bound)</li>
+        </ul>
+        It's interesting to me that the GOS implementation struggled at the CPU mark. It makes me think that there is
+        still room to improve for the GOS implementation. I'm not 100% confident about my abilities to use Unity Jobs.
+        </p>
+
+        <h2>Test 2 - Boid Simulation</h2>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/ecs-boids.gif">
+            </div>
+            <p class="text-label">
+                Technical details of the BYU 2024 Mars Rover
+            </p>
+        </div>
+        <p class="body">
+            ECS really outshone GOS in this test. This is a conventional boids algorithm implementation confined within
+            a 3D cube. The cube is broken up into a spatial hash-map. Each boid must know its neighbors' states
+            (direction and position) and modify its own in accordance. I'd like to point out that I'm not 100% confident
+            in my Unity Jobs implementation. Regardless, I think that this particular test highlights ECS's ability to
+            multithread logic very efficiently. This allows it to handle massive amounts of entities.
+        </p>
+        <h3>Test Results</h3>
+        <p class="body">
+            ECS outperformed GOS by 15-30x 🔥
+        <ul>
+            <li>Quest 2 ECS: 15k entities</li>
+            <li>Quest 3 ECS: 30k objects</li>
+            <li>Quest 2 GOS: 950 entities</li>
+            <li>Quest 3 GOS: 1k objects</li>
+        </ul>
+        </p>
+
+        <h2>Test 3 - Simple-Logic Objects</h2>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/ecs-simple.gif">
+            </div>
+            <p class="text-label">
+                Technical details of the BYU 2024 Mars Rover
+            </p>
+        </div>
+        <p class="body">
+            This test showed how each system could handle rendering thousands of "simple" objects. Each object bobbed up
+            & down in a simple sine wave. The entities/objects were arrayed in such a way that all of them could be seen
+            within the camera's view frustrum.
+        </p>
+        <h3>Test Results</h3>
+        <p class="body">
+            ECS outperformed GOS by 5-6x.
+        <ul>
+            <li>Quest 2 ECS: 20k entities</li>
+            <li>Quest 3 ECS: 30k objects</li>
+            <li>Quest 2 GOS: 3k entities</li>
+            <li>Quest 3 GOS: 6.5k objects</li>
+        </ul>
+        This test illustrates how efficient the ECS Entities Graphics package is.
+        </p>
+    </div>
+</body>
+
+</html>
