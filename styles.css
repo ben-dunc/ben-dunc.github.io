@@ -195,10 +195,11 @@ a:active {
     justify-content: center;
     max-width: 50px;
 
-    p {
-        text-align: center;
-        font-family: "sono";
-    }
+}
+
+.tool-label {
+    text-align: center;
+    font-family: "sono";
 }
 
 .tool-img {
@@ -257,16 +258,16 @@ a:active {
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    height: 100%;
-    max-width: 100%;
+    width: 100%;
+    max-height: 100%;
     border-radius: 8px;
 }
 
 /* And set the max-width of the parent element */
 .video-wrap {
     padding: 20px 0;
-    width: 100%;
-    max-width: 600px;
+    height: 100%;
+    max-height: 600px;
     margin: auto;
 }
 
