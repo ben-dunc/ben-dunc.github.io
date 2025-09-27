@@ -118,11 +118,53 @@ a:active {
     color: var(--text-dark);
 }
 
+.header {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    margin: 0;
+    padding: 0;
+    padding-top: 16px;
+    width: 100%;
+}
+
+.portrait {
+    flex-grow: 1;
+    position: relative;
+    min-width: 200px;
+    max-width: 400px;
+    padding-left: 16px;
+    margin: auto;
+    width: min-content;
+}
+
+
+@media screen and (max-width: 640px) {
+    .portrait {
+        padding: 0;
+    }
+}
+
+.portrait img {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+
 .title {
-    position: sticky;
-    bottom: 0;
     padding-bottom: 15px;
     background-color: var(--background);
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    /* align-content: center; */
+    width: min-content;
+}
+
+.title h1 {
+    margin-top: 0;
 }
 
 .projects {
@@ -138,7 +180,7 @@ a:active {
 }
 
 .project-box {
-    min-width: 200px;
+    /* min-width: 100px; */
     height: 300px;
     border-radius: 8px;
     margin: 5px;
@@ -171,13 +213,19 @@ a:active {
     position: absolute;
     left: 0px;
     bottom: 0px;
+    width: 100%;
     padding: 0.5em;
     font-size: 1rem;
     font-weight: 900;
-    text-shadow: 0px 0px 1em var(--text-dark);
+    /* text-shadow: 0px 0px 1em var(--text-dark); */
     color: white;
-    background-color: var(--background);
-    border-radius: 0px 8px 0px 0px;
+    /* text-align:center; */
+    background-color: var(--background-light);
+    /* border-radius: 0px 8px 0px 0px; */
+}
+
+.tool-title {
+    color: var(--text-subsubtitle);
 }
 
 .tool-container {
@@ -216,29 +264,6 @@ a:active {
     color: var(--text-light);
 }
 
-@media screen and (max-width: 720px) {
-    /* body {
-        margin: none;
-    }
-
-    h1,
-    h2 {
-        font-size: 2rem;
-    }
-
-    .project-row {
-        flex-flow: column wrap;
-    } */
-
-    /* .project-box {
-        height: 150px;
-    }
-
-    .large-project-box {
-        height: 50vh;
-    } */
-}
-
 /* Set your aspect ratio */
 .video-container {
     position: relative;
@@ -256,8 +281,8 @@ a:active {
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    width: 100%;
-    max-height: 100%;
+    height: 100%;
+    max-width: 100%;
     border-radius: 8px;
 }
 
@@ -278,4 +303,22 @@ a:active {
     width: 100%;
     text-align: right;
     margin: 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1) translateY(-50%);
+    }
+
+    50% {
+        transform: scale(1.1) translateY(-50%);
+    }
+
+    100% {
+        transform: scale(1) translateY(-50%);
+    }
+}
+
+.pulse {
+    animation: pulse 5s infinite;
 }
