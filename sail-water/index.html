@@ -14,26 +14,47 @@
         <p class="home-nav">
             <a href="/">home</a>
         </p>
-        <h1 class="pt-0">Mobile-Efficient Ocean Waves in Sail VR</h1>
+        <h1 class="pt-0">Sail VR: Mobile Efficient Waves</h1>
         <div class="video-wrap">
             <div class="video-container">
-                <embed src="/assets/images/sail-water-720.gif">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dnx-X7bK3Ds?autoplay=1&mute=1"
+                    title="Sail VR - Graphics Update" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
             </div>
             <p class="text-label">
-                Water in <a target="_blank" href="https://www.meta.com/experiences/sail/4861702420530349">Sail VR</a>
-                with an example ship bobbing up & down with the waves. Note how the ship doesn't tilt. This
-                is to prevent motion sickness in our players.
+                The Graphics Update Trailer featuring the new mobile-efficient waves.
             </p>
         </div>
-        <!-- SETUP -->
-        <h3>Water In Sail VR</h3>
+
         <p class="body">
-            <a target="_blank" href="https://www.meta.com/experiences/sail/4861702420530349">Sail VR</a> is a virtual
-            reality video game written with Unity for the Meta Quest devices. The game encourages
-            players to live the life of a pirate, looting islands, treasure hunting, and engaging in battles on the open
-            sea. The ocean is a critical part of the game, not only being the largest environment but also the host of
-            many
-            exciting activites such as PVP ship combat, boss battles, and NPC ship battles.
+            Sail VR is an immersive pirate adventure that allows players to sail the high seas, fight
+            enemies, solve clues, and loot treasure. I've been working on Sail VR in Red Team Interactive since 2022.
+            <b>
+                Since I began working on Sail, we've reached over 1 million players, 100 thousand unique monthly active
+                users, reached the top 50 most popular
+                games on the Meta Quest store, and gained over 74k members on our discord.
+            </b>
+            It's been a ton of fun to develop and I've learned a lot on the way. Among the greatest things that I've
+            learned has been technical art. I love to paint & draw and I love to program. Technical artistry is the
+            perfect blend of the two. I had the opporunity to make beautiful yet mobile-efficient water in Sail VR.
+        </p>
+        <h3>
+            <a target="_blank" href="https://www.meta.com/experiences/sail/4861702420530349/">Play On Meta Quest</a>
+        </h3>
+        <h3>
+            <a target="_blank" href="https://store.steampowered.com/app/1684010/Sail/">Play On Steam</a>
+        </h3>
+        <h3>
+            <a target="_blank" href="https://discord.com/invite/sailvr">Join The Discord</a>
+        </h3>
+        <h2 class="mt-16 pt-16">Challenges and Solutions for Mobile-Efficient Water In Sail VR</h2>
+        <p class="body">
+            Working on a new water shader for our ocean was <i>by far</i> my most favorite project. The ocean in Sail VR
+            is a critical part of the game, not only being the largest environment but also
+            the host of
+            many exciting activites such as PVP ship combat, boss battles, and NPC ship battles.
             I was tasked with implementing a custom water shader that would:
         <ul>
             <li>be beautiful</li>
@@ -43,10 +64,12 @@
         </p>
         <div class="video-wrap">
             <div class="video-container">
-                <embed src="/assets/images/sail-water-before-after.gif">
+                <embed src="/assets/images/sail-water-720.gif">
             </div>
             <p class="text-label">
-                What the water was (left) vs what the water became (right)
+                Water in <a target="_blank" href="https://www.meta.com/experiences/sail/4861702420530349">Sail VR</a>
+                with an example ship bobbing up & down with the waves. Note how the ship doesn't tilt. This
+                is to prevent motion sickness in our players.
             </p>
         </div>
 
@@ -69,6 +92,14 @@
             It wasn't abnormal to play with a 40-50 FPS due to a maxed out GPU. The greatest performance hit was the old
             water shader we were using, one that we got from the Unity Asset Store.
         </p>
+        <div class="video-wrap">
+            <div class="video-container">
+                <embed src="/assets/images/sail-water-before-after.gif">
+            </div>
+            <p class="text-label">
+                What the water was (left) vs what the water became (right)
+            </p>
+        </div>
 
         <h3>Vertex Displacment</h3>
         <p class="body">
