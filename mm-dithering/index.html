@@ -3,8 +3,8 @@
 
 <head>
     <title>Benjamin Duncan - Portfolio</title>
-    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../../spacing.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="icon" type="image/x-icon" href="../assets/icons/page_icon_pink.png">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
@@ -17,58 +17,97 @@
         <h1 class="pt-0">Mobile-Efficient Dithering In Monsters And Mazes</h1>
         <div class="video-wrap">
             <div class="video-container">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/IRhxdWtu1_s?autoplay=1&mute=1"
+                    title="Monsters And Mazes: Cosmetic Update" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-label">
+                The Customization Update Trailer previewing all of the new available items.
+            </p>
+        </div>
+        <h3>
+            <a target="_blank" href="https://www.meta.com/experiences/monsters-and-mazes/9972710149415118/">Play
+                On Meta Quest</a>
+        </h3>
+        <h3>
+            <a target="_blank" href="https://discord.gg/W6SbDaX3">Join The Discord</a>
+        </h3>
+        <!-- THE CHALLENGE -->
+        <p class="mt-16 body">
+            In Red Team Interactive's game, <a target="_blank"
+                href="https://www.meta.com/en-gb/experiences/monsters-and-mazes/9972710149415118/">Monsters &
+                Mazes</a>,
+            players compete in PvP matches. At the beginning of every round, one player is
+            chosen to be the monster. All other players must explore the maze, accomplish an objective, and escape
+            within a time limit.
+            The monster and its abilities are unique to every maze. In our backrooms-inspired maze, the monster is
+            the
+            smilier has has the ability to travers walls for a limited time.
+        </p>
+        <p class="body">
+            <b>
+                Within 3 months of releasing Monsters And Mazes, we had a unique monthly active user count of 33
+                thousand,
+                over 100 k players, and we're still going up.
+            </b>
+        </p>
+        <h2>Challenges And Solutions for Mobile-Dfficient Layered Dithering in Monsters And Mazes</h2>
+        <h3>The problem</h3>
+        <p class="body">
+            Removing the colliders on the walls so that the player who is playing as the monster can move through
+            them
+            is pretty easy. However, we wanted a dissolve effect in our game. As the "shader guy" in our studio,
+            this
+            was my task: <b>how to make a dithering shader that was both performant and interesting on a Quest
+                2.</b>
+            There were two main optimization considerations: (1) dithering can have major performance impacts when
+            objects are layered on top of one another, forcing the GPU to redraw a pixel and
+            (2) our game included a real-time light - a head lamp on the player's head - which can be intensive on
+            the
+            Quest 2 GPU.
+        </p>
+        <div class="video-wrap">
+            <div class="video-container">
                 <embed src="/assets/images/mm-dithering.gif">
             </div>
             <p class="text-label">
                 The dithering effect in the backrooms-inspired maze in Monsters And Mazes
             </p>
         </div>
-        <!-- THE CHALLENGE -->
-        <p class="body">
-            In Red Team Interactive's game, <a target="_blank"
-                href="https://www.meta.com/en-gb/experiences/monsters-and-mazes/9972710149415118/">Monsters & Mazes</a>,
-            players compete in PvP matches. At the beginning of every round, one player is
-            chosen to be the monster. All other players must explore the maze, accomplish an objective, and escape
-            within a time limit.
-            The monster and its abilities are unique to every maze. In our backrooms-inspired maze, the monster is the
-            smilier has has the ability to
-            travers walls for a limited time.
-        </p>
-        <h3>The problem</h3>
-        <p class="body">
-            Removing the colliders on the walls so that the player who is playing as the monster can move through them
-            is pretty easy. However, we wanted a dissolve effect in our game. As the "shader guy" in our studio, this
-            was my task: <b>how to make a dithering shader that was both performant and interesting on a Quest 2.</b>
-            There were two main optimization considerations: (1) dithering can have major performance impacts when
-            objects are layered on top of one another, forcing the GPU to redraw a pixel and
-            (2) our game included a real-time light - a head lamp on the player's head - which can be intensive on the
-            Quest 2 GPU.
-        </p>
         <h3>Poor Performance With Unity's ShaderGraph</h3>
         <p class="body">
             When I approached this problem, I figured that I would use Unity's ShaderGraph for an easy and simple
             implementation. However, this was not at all performant in a dithering shader and when receiving the
             player's headlamp.
-            This was because ShaderGraph <i>appears</i> to discard (the dither operation) the fragement after all of the
-            lighting calculations & texture reads and ShaderGraph only supports <i>URP's Lit</i> (vs URP's Simple Lit)
+            This was because ShaderGraph <i>appears</i> to discard (the dither operation) the fragement after all of
+            the
+            lighting calculations & texture reads and ShaderGraph only supports <i>URP's Lit</i> (vs URP's Simple
+            Lit)
             lighting calculations.
             This, of course, has a huge impact on our performance. Not only were we forcing the GPU to calculate
-            multiple entire fragments before per pixel but we were also using complex lighting calculations for mobile
+            multiple entire fragments before per pixel but we were also using complex lighting calculations for
+            mobile
             hardware.
         </p>
         <h3>The Solution</h3>
         <p class="body">
-            The solution for these two problems was simple: create a custom shader that supported a discard early in the
+            The solution for these two problems was simple: create a custom shader that supported a discard early in
+            the
             fragment shader and utilize the mobile-friendtly lighting calculations in URP's Simple Lit.
             To do this, I duplicated the SimpleLit.shader within the URP package, modified it to meet our needs
-            (triplaner projection) and then created a custom early-fragment discard. The shader discards the fragment if
+            (triplaner projection) and then created a custom early-fragment discard. The shader discards the
+            fragment if
             the player is too close.
-            A noise texture is sampled according to triplaner UVs to create the dissolving effect and some coloring is
+            A noise texture is sampled according to triplaner UVs to create the dissolving effect and some coloring
+            is
             applied near the discard threshold.
             The result is the dithering effect you can see in the gif above.
         </p>
         <p class="body">
-            The final result was <i>much</i> more performant. Before, when the player activated the monster's ability,
+            The final result was <i>much</i> more performant. Before, when the player activated the monster's
+            ability,
             the FPS would drop to 30 FPS.
             In addition, the GPU utilization would sky-rocket.
             After I implemented our own shader, the FPS was a stable 72 FPS and the GPU utilization was impacted
